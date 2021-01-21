@@ -1,0 +1,7 @@
+---
+- name: install global npm modules
+  npm:
+    name: "{{ item.split('@')[0] }}"
+    version: "{{ item.split('@')[1] if '@' in item else '' }}"
+    global: yes
+  loop: "{{ nodejs_global_modules }}"

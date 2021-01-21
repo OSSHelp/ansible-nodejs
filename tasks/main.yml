@@ -1,0 +1,8 @@
+---
+- name: install
+  include_tasks: install.yml
+  when: nodejs_setup == "full" or nodejs_setup == "install"
+
+- name: configure
+  import_tasks: configure.yml
+  when: nodejs_setup == "full" or nodejs_setup == "configure"

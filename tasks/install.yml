@@ -1,0 +1,38 @@
+---
+- name: gather required facts
+  setup:
+    gather_subset: [min]
+  when: ansible_distribution_release is not defined
+
+- name: install required packages
+  apt:
+    name:
+      - curl
+      - gnupg
+      - apt-transport-https
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: add pgp key
+  apt_key:
+    url: "{{ nodejs_repo_key }}"
+    state: present
+
+- name: add main repo
+  apt_repository:
+    repo: "{{ nodejs_main_repo }}"
+    state: present
+    filename: "{{ nodejs_repo_file }}"
+
+- name: add src repo
+  apt_repository:
+    repo: "{{ nodejs_src_repo }}"
+    state: present
+    filename: "{{ nodejs_repo_file }}"
+  when: nodejs_src_repo_enabled
+
+- name: install nodejs
+  apt:
+    name: nodejs
+    update_cache: true
+    cache_valid_time: 86400

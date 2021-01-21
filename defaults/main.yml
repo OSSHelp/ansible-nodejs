@@ -1,0 +1,9 @@
+---
+nodejs_setup: full
+nodejs_version: "12"
+nodejs_repo_key: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+nodejs_repo_file: "nodesource.list"
+nodejs_main_repo: "deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+nodejs_src_repo: "deb-src https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+nodejs_src_repo_enabled: false
+nodejs_global_modules: []
